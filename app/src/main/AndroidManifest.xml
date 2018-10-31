@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PhotoDetector"></activity>
+        <activity android:name=".PhotoDetector"/>
         <activity android:name=".FaceTrackerActivity"
             android:screenOrientation="fullSensor"/>
 

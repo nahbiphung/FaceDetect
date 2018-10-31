@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.FaceDetector;
+
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -18,11 +18,13 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
+import com.google.android.gms.vision.face.FaceDetector;
 import com.google.android.gms.vision.face.Landmark;
 
 import java.io.FileNotFoundException;
@@ -35,12 +37,16 @@ public class PhotoDetector extends AppCompatActivity {
 
     private Button btnChoose,btnCheck;
     private ImageView imgView;
+    private ImageButton imbRedHat;
 
     private Uri filePath;
     private  final  int PICK_IMAGE_REQUSET =71;
 
     private Paint paint;
     private Bitmap myBitmap,tempBitmap;
+    private Bitmap bmRedHat;
+
+    Canvas tempCanvas;
 
 //    private static final int RQS_LOADIMAGE = 1;
 //    private Bitmap myBitmap;
@@ -53,6 +59,10 @@ public class PhotoDetector extends AppCompatActivity {
         btnChoose = findViewById(R.id.btn_choose);
         btnCheck = findViewById(R.id.btn_check);
         imgView = findViewById(R.id.imagesView);
+        imbRedHat = findViewById(R.id.imb_redhat);
+
+        myBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.photo);
+        imgView.setImageBitmap(myBitmap);
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,13 +81,13 @@ public class PhotoDetector extends AppCompatActivity {
                 paint.setStyle(Paint.Style.STROKE);
 
                 tempBitmap = Bitmap.createBitmap(myBitmap.getWidth(),myBitmap.getHeight(),Bitmap.Config.RGB_565);
-                Canvas tempCanvas = new Canvas(tempBitmap);
+                tempCanvas = new Canvas(tempBitmap);
                 tempCanvas.drawBitmap(myBitmap, 0, 0, null);
 
-                com.google.android.gms.vision.face.FaceDetector faceDetector = new com.google.android.gms.vision.face.FaceDetector.Builder(getApplicationContext())
+                FaceDetector faceDetector = new FaceDetector.Builder(getApplicationContext())
                         .setTrackingEnabled(false)
-                        .setLandmarkType(com.google.android.gms.vision.face.FaceDetector.ALL_LANDMARKS)
-                        .setClassificationType(com.google.android.gms.vision.face.FaceDetector.ALL_CLASSIFICATIONS)
+                        .setLandmarkType(FaceDetector.ALL_LANDMARKS)
+                        .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
                         .build();
 
                 if(!faceDetector.isOperational()){
@@ -105,6 +115,36 @@ public class PhotoDetector extends AppCompatActivity {
         });
 
 
+        imbRedHat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bmRedHat = BitmapFactory.decodeResource(getResources(),R.drawable.redhat);
+
+                tempBitmap = Bitmap.createBitmap(myBitmap.getWidth(),myBitmap.getHeight(),Bitmap.Config.RGB_565);
+                tempCanvas = new Canvas(tempBitmap);
+                tempCanvas.drawBitmap(myBitmap, 0, 0, null);
+
+                FaceDetector faceDetector = new FaceDetector.Builder(getApplicationContext())
+                        .setTrackingEnabled(false)
+                        .setLandmarkType(FaceDetector.ALL_LANDMARKS)
+                        .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
+                        .build();
+
+                if(!faceDetector.isOperational()){
+                    Toast.makeText(PhotoDetector.this,"Face Detector could not be set up on your devices",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
+                SparseArray<Face>  faces = faceDetector.detect(frame);
+
+                for(int i=0; i<faces.size(); i++) {
+                    Face face = faces.valueAt(i);
+                    detectLandmarks(face);
+                }
+                imgView.setImageDrawable(new BitmapDrawable(getResources(),tempBitmap));
+            }
+        });
 //        btnChoose.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -163,7 +203,6 @@ public class PhotoDetector extends AppCompatActivity {
             try{
                 myBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
                 imgView.setImageBitmap(myBitmap);
-
             }
             catch (IOException e){
                 e.printStackTrace();
@@ -171,7 +210,22 @@ public class PhotoDetector extends AppCompatActivity {
         }
     }
 
+    private  void detectLandmarks(Face face){
+        for(Landmark landmark:face.getLandmarks()){
+            int cx = (int)(landmark.getPosition().x);
+            int cy = (int)(landmark.getPosition().y);
 
+            drawOnImageView(landmark.getType(),cx,cy);
+        }
+    }
+
+    private void drawOnImageView(int type,int cx,int cy){
+        if(type == Landmark.NOSE_BASE){
+            int scaleWidth = bmRedHat.getScaledWidth(tempCanvas);
+            int scaleHeight = bmRedHat.getScaledHeight(tempCanvas);
+            tempCanvas.drawBitmap(bmRedHat,cx - (scaleWidth/2),cy - (scaleHeight),null);
+        }
+    }
 //    private void detectFace(){
 //
 //        //Create a Paint object for drawing with
