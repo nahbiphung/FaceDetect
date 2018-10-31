@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Photo Detector",Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-                        Toast.makeText(MainActivity.this,"bbb",Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent(MainActivity.this,FaceTrackerActivity.class);
+                        startActivity(intent1);
+                        Toast.makeText(MainActivity.this,"Camera Detector",Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
                         Toast.makeText(MainActivity.this,"ccc",Toast.LENGTH_SHORT).show();
