@@ -22,6 +22,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -38,6 +40,7 @@ import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.example.admin.facedetect.ui.camera.CameraSourcePreview;
 import com.example.admin.facedetect.ui.camera.GraphicOverlay;
+import com.google.android.gms.vision.face.Landmark;
 
 import java.io.IOException;
 
@@ -121,13 +124,15 @@ public final class FaceTrackerActivity extends AppCompatActivity {
      */
     private void createCameraSource() {
 
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.photo);
+
         Context context = getApplicationContext();
         FaceDetector detector = new FaceDetector.Builder(context)
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
                 .build();
 
         detector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
+                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(bmp))
                         .build());
 
         if (!detector.isOperational()) {
@@ -267,9 +272,16 @@ public final class FaceTrackerActivity extends AppCompatActivity {
      * uses this factory to create face trackers as needed -- one for each individual.
      */
     private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face> {
+
+        Bitmap bmp;
+
+        public GraphicFaceTrackerFactory(Bitmap bmp) {
+            this.bmp = bmp;
+        }
+
         @Override
         public Tracker<Face> create(Face face) {
-            return new GraphicFaceTracker(mGraphicOverlay);
+            return new GraphicFaceTracker(mGraphicOverlay, bmp);
         }
     }
 
@@ -280,10 +292,12 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private class GraphicFaceTracker extends Tracker<Face> {
         private GraphicOverlay mOverlay;
         private FaceGraphic mFaceGraphic;
+        private Bitmap bmp;
 
-        GraphicFaceTracker(GraphicOverlay overlay) {
+        GraphicFaceTracker(GraphicOverlay overlay, Bitmap bmp) {
             mOverlay = overlay;
-            mFaceGraphic = new FaceGraphic(overlay);
+            mFaceGraphic = new FaceGraphic(overlay,bmp);
+            this.bmp = bmp;
         }
 
         /**
@@ -300,7 +314,10 @@ public final class FaceTrackerActivity extends AppCompatActivity {
         @Override
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             mOverlay.add(mFaceGraphic);
-            mFaceGraphic.updateFace(face);
+           // mFaceGraphic.updateFace(face);
+
+            mFaceGraphic.updateFace_icon(face,bmp);
+
         }
 
         /**

@@ -18,18 +18,29 @@ package com.example.admin.facedetect;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.Shader;
 
 import com.example.admin.facedetect.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.face.Face;
+import com.google.android.gms.vision.face.Landmark;
+
+import java.util.List;
 
 /**
  * Graphic instance for rendering face position, orientation, and landmarks within an associated
  * graphic overlay view.
  */
 class FaceGraphic extends GraphicOverlay.Graphic {
+    // Create bitmap REDHAT
+    private Bitmap bitmap;
+    private Bitmap bmRedHat;
+//    private int pos;
+
     private static final float FACE_POSITION_RADIUS = 10.0f;
     private static final float ID_TEXT_SIZE = 40.0f;
     private static final float ID_Y_OFFSET = 50.0f;
@@ -55,7 +66,7 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     private int mFaceId;
     private float mFaceHappiness;
 
-    FaceGraphic(GraphicOverlay overlay) {
+    FaceGraphic(GraphicOverlay overlay, Bitmap bmp) {
         super(overlay);
 
         mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.length;
@@ -72,6 +83,11 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         mBoxPaint.setColor(selectedColor);
         mBoxPaint.setStyle(Paint.Style.STROKE);
         mBoxPaint.setStrokeWidth(BOX_STROKE_WIDTH);
+
+        // add to add a REDHAT
+        //bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(), R.drawable.nose);
+        this.bmRedHat = bmp;
+//        this.pos = pos;
     }
 
     void setId(int id) {
@@ -85,6 +101,17 @@ class FaceGraphic extends GraphicOverlay.Graphic {
      */
     void updateFace(Face face) {
         mFace = face;
+        //update Face when put REDHAT in
+        bmRedHat = Bitmap.createScaledBitmap(bitmap, (int) scaleX(face.getWidth()),
+                (int) scaleY(((bitmap.getHeight() * face.getWidth()) / bitmap.getWidth())), false);
+        postInvalidate();
+    }
+
+    void updateFace_icon(Face face,Bitmap bmp) {
+        mFace = face;
+        //update Face when put REDHAT in
+        bmRedHat = Bitmap.createScaledBitmap(bmp, (int) scaleX(face.getWidth()),
+                (int) scaleY(((bmp.getHeight() * face.getWidth()) / bmp.getWidth())), false);
         postInvalidate();
     }
 
@@ -101,14 +128,12 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         // Draws a circle at the position of the detected face, with the face's track id below.
         float x = translateX(face.getPosition().x + face.getWidth() / 2);
         float y = translateY(face.getPosition().y + face.getHeight() / 2);
-        canvas.drawCircle(x, y, FACE_POSITION_RADIUS, mFacePositionPaint);
-        canvas.drawText("id: " + mFaceId, x + ID_X_OFFSET, y + ID_Y_OFFSET, mIdPaint);
-        canvas.drawText("happiness: " + String.format("%.2f", face.getIsSmilingProbability()), x - ID_X_OFFSET, y - ID_Y_OFFSET, mIdPaint);
-        canvas.drawText("right eye: " + String.format("%.2f", face.getIsRightEyeOpenProbability()), x + ID_X_OFFSET * 2, y + ID_Y_OFFSET * 2, mIdPaint);
-        canvas.drawText("left eye: " + String.format("%.2f", face.getIsLeftEyeOpenProbability()), x - ID_X_OFFSET*2, y - ID_Y_OFFSET*2, mIdPaint);
 
-        Bitmap bmRedHat = BitmapFactory.decodeResource(Resources.getSystem(),R.drawable.redhat);
-        canvas.drawBitmap(bmRedHat, x , y , mIdPaint);
+//        canvas.drawCircle(x, y, FACE_POSITION_RADIUS, mFacePositionPaint);
+//        canvas.drawText("id: " + mFaceId, x + ID_X_OFFSET, y + ID_Y_OFFSET, mIdPaint);
+//        canvas.drawText("happiness: " + String.format("%.2f", face.getIsSmilingProbability()), x - ID_X_OFFSET, y - ID_Y_OFFSET, mIdPaint);
+//        canvas.drawText("right eye: " + String.format("%.2f", face.getIsRightEyeOpenProbability()), x + ID_X_OFFSET * 2, y + ID_Y_OFFSET * 2, mIdPaint);
+//        canvas.drawText("left eye: " + String.format("%.2f", face.getIsLeftEyeOpenProbability()), x - ID_X_OFFSET*2, y - ID_Y_OFFSET*2, mIdPaint);
 
         // Draws a bounding box around the face.
         float xOffset = scaleX(face.getWidth() / 2.0f);
@@ -118,5 +143,20 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         float right = x + xOffset;
         float bottom = y + yOffset;
         canvas.drawRect(left, top, right, bottom, mBoxPaint);
+
+
+
+//        Get REDHAT
+//        float eyeY =  bmRedHat.getHeight();
+
+        for(Landmark l : face.getLandmarks()){
+            if(l.getType() == Landmark.NOSE_BASE){
+                canvas.drawText("abc",x, y, mBoxPaint);
+            }
+        }
+
+//        canvas.drawBitmap(bmRedHat, left, top, new Paint());
     }
+
+
 }

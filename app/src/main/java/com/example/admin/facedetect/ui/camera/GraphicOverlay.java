@@ -58,6 +58,9 @@ public class GraphicOverlay extends View {
      * graphics element.  Add instances to the overlay using {@link GraphicOverlay#add(Graphic)}.
      */
     public static abstract class Graphic {
+        public GraphicOverlay getOverlay(){
+            return mOverlay;
+        }
         private GraphicOverlay mOverlay;
 
         public Graphic(GraphicOverlay overlay) {
@@ -77,6 +80,8 @@ public class GraphicOverlay extends View {
          * @param canvas drawing canvas
          */
         public abstract void draw(Canvas canvas);
+
+
 
         /**
          * Adjusts a horizontal value of the supplied value from the preview scale to the view
@@ -183,4 +188,5 @@ public class GraphicOverlay extends View {
             }
         }
     }
+
 }
