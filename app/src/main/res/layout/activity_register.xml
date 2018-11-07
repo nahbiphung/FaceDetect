@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_Login"
+        android:id="@+id/tv_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -32,12 +32,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Login"
+        android:text="Register"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
     <TextView
         android:id="@+id/tv_UserAccount"
@@ -48,7 +48,7 @@
         android:layout_marginTop="56dp"
         android:text="User Account :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Login" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_Register" />
 
     <TextView
         android:id="@+id/tv_Password"
@@ -56,16 +56,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="50dp"
         android:text="Password :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_UserAccount" />
 
     <EditText
-        android:id="@+id/edt_UserAccount"
-        android:layout_width="wrap_content"
+        android:id="@+id/reg_UserAccount"
+        android:layout_width="209dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
@@ -74,10 +74,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Login" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_Register" />
 
     <Button
-        android:id="@+id/btn_Login"
+        android:id="@+id/btn_Register"
         android:layout_width="114dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
@@ -85,45 +85,45 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Login"
-        android:textAllCaps="false"
         android:background="@color/ping80per"
+        android:text="Register"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_Password" />
+        app:layout_constraintTop_toBottomOf="@+id/reg_PasswordConfirm" />
 
     <TextView
-        android:id="@+id/tv_ForgotPassword"
+        android:id="@+id/tv_HaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Forgot Password ???"
+        android:text="Already have an Account"
         android:textColor="@android:color/holo_blue_dark"
-        app:layout_constraintEnd_toEndOf="@+id/btn_Login"
-        app:layout_constraintStart_toStartOf="@+id/btn_Login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Login" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_Register"
+        app:layout_constraintStart_toStartOf="@+id/btn_Register"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Register" />
+
 
     <TextView
-        android:id="@+id/tv_Registry"
+        android:id="@+id/tv_RePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Dont have account ?"
-        android:textColor="@android:color/holo_blue_dark"
-        app:layout_constraintEnd_toEndOf="@+id/tv_ForgotPassword"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="@+id/tv_ForgotPassword"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ForgotPassword" />
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="50dp"
+        android:text="Password Confirm :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Password" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/edt_Password"
+        android:id="@+id/reg_Password"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/edt_UserAccount"
+        app:layout_constraintEnd_toEndOf="@+id/reg_UserAccount"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/edt_UserAccount"
-        app:layout_constraintTop_toBottomOf="@+id/edt_UserAccount"
+        app:layout_constraintStart_toStartOf="@+id/reg_UserAccount"
+        app:layout_constraintTop_toBottomOf="@+id/reg_UserAccount"
         app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
@@ -132,6 +132,24 @@
             android:baselineAligned="false"
             android:hint="@string/password"
             android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/reg_PasswordConfirm"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/reg_UserAccount"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/reg_Password"
+        app:layout_constraintTop_toBottomOf="@+id/reg_Password"
+        app:passwordToggleEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Password Confirm"
+            android:inputType="textPassword"/>
     </android.support.design.widget.TextInputLayout>
 
 
