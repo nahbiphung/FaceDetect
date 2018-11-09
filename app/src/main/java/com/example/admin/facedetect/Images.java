@@ -29,10 +29,10 @@ public class Images {
 
     public static ArrayList initImage(){
         ArrayList<Images> arrayList = new ArrayList<>();
-        arrayList.add(new Images(R.drawable.photo,"Photo Detector"));
-        arrayList.add(new Images(R.drawable.photo,"Camera Detector"));
-        arrayList.add(new Images(R.drawable.photo,"Barcode Detector"));
-        arrayList.add(new Images(R.drawable.photo,"Text Detector"));
+        arrayList.add(new Images(R.drawable.picture,"Photo Detector"));
+        arrayList.add(new Images(R.drawable.camera,"Camera Detector"));
+        arrayList.add(new Images(R.drawable.barcode,"Barcode Detector"));
+        arrayList.add(new Images(R.drawable.text,"Text Detector"));
         return arrayList;
     }
 }
