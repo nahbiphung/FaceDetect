@@ -30,6 +30,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -43,6 +44,8 @@ import com.example.admin.facedetect.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.face.Landmark;
 
 import java.io.IOException;
+
+import static android.view.View.GONE;
 
 /**
  * Activity for the face tracker app.  This app detects faces with the rear facing camera, and draws
@@ -60,6 +63,23 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
+    private int typeFace = 0;
+    private static final int MASK[] = {
+            R.id.no_filter,
+            R.id.hair,
+            R.id.op,
+            R.id.snap,
+            R.id.glasses2,
+            R.id.glasses3,
+            R.id.glasses4,
+            R.id.glasses5,
+            R.id.mask,
+            R.id.mask2,
+            R.id.mask3,
+            R.id.dog,
+            R.id.cat2
+    };
+
     //==============================================================================================
     // Activity Methods
     //==============================================================================================
@@ -74,6 +94,151 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay) findViewById(R.id.faceOverlay);
+
+
+        ImageButton face = (ImageButton) findViewById(R.id.face);
+        face.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(findViewById(R.id.scrollView).getVisibility() == GONE){
+                    findViewById(R.id.scrollView).setVisibility(View.VISIBLE);
+                    ((ImageButton) findViewById(R.id.face)).setImageResource(R.drawable.face_select);
+                }else{
+                    findViewById(R.id.scrollView).setVisibility(GONE);
+                    ((ImageButton) findViewById(R.id.face)).setImageResource(R.drawable.face);
+                }
+            }
+        });
+
+        ImageButton no_filter = (ImageButton) findViewById(R.id.no_filter);
+        no_filter.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 0;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton hair = (ImageButton) findViewById(R.id.hair);
+        hair.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 1;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton op = (ImageButton) findViewById(R.id.op);
+        op.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 2;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton snap = (ImageButton) findViewById(R.id.snap);
+        snap.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 3;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton glasses2 = (ImageButton) findViewById(R.id.glasses2);
+        glasses2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 4;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton glasses3 = (ImageButton) findViewById(R.id.glasses3);
+        glasses3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 5;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton glasses4 = (ImageButton) findViewById(R.id.glasses4);
+        glasses4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 6;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton glasses5 = (ImageButton) findViewById(R.id.glasses5);
+        glasses5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 7;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton mask = (ImageButton) findViewById(R.id.mask);
+        mask.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 8;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton mask2 = (ImageButton) findViewById(R.id.mask2);
+        mask2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 9;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton mask3 = (ImageButton) findViewById(R.id.mask3);
+        mask3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 10;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton dog = (ImageButton) findViewById(R.id.dog);
+        dog.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 11;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton cat2 = (ImageButton) findViewById(R.id.cat2);
+        cat2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
+                typeFace = 12;
+                findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background_select);
+            }
+        });
+
+        ImageButton button = (ImageButton) findViewById(R.id.change);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            }
+        });
+
+        ImageButton camera = (ImageButton) findViewById(R.id.camera);
+        camera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onPause();
+            }
+        });
+
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -124,15 +289,22 @@ public final class FaceTrackerActivity extends AppCompatActivity {
      */
     private void createCameraSource() {
 
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.photo);
+//        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.redhat);
+
+//        Context context = getApplicationContext();
+//        FaceDetector detector = new FaceDetector.Builder(context)
+//                .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
+//                .build();
 
         Context context = getApplicationContext();
         FaceDetector detector = new FaceDetector.Builder(context)
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
+                .setLandmarkType(FaceDetector.ALL_LANDMARKS)
+                .setMode(FaceDetector.ACCURATE_MODE)
                 .build();
 
         detector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(bmp))
+                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
                         .build());
 
         if (!detector.isOperational()) {
@@ -273,15 +445,20 @@ public final class FaceTrackerActivity extends AppCompatActivity {
      */
     private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face> {
 
-        Bitmap bmp;
-
-        public GraphicFaceTrackerFactory(Bitmap bmp) {
-            this.bmp = bmp;
-        }
+//        Bitmap bmp;
+//
+//        public GraphicFaceTrackerFactory(Bitmap bmp) {
+//            this.bmp = bmp;
+//        }
+//
+//        @Override
+//        public Tracker<Face> create(Face face) {
+//            return new GraphicFaceTracker(mGraphicOverlay, bmp);
+//        }
 
         @Override
         public Tracker<Face> create(Face face) {
-            return new GraphicFaceTracker(mGraphicOverlay, bmp);
+            return new GraphicFaceTracker(mGraphicOverlay);
         }
     }
 
@@ -292,12 +469,10 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private class GraphicFaceTracker extends Tracker<Face> {
         private GraphicOverlay mOverlay;
         private FaceGraphic mFaceGraphic;
-        private Bitmap bmp;
 
-        GraphicFaceTracker(GraphicOverlay overlay, Bitmap bmp) {
+        GraphicFaceTracker(GraphicOverlay overlay) {
             mOverlay = overlay;
-            mFaceGraphic = new FaceGraphic(overlay,bmp);
-            this.bmp = bmp;
+            mFaceGraphic = new FaceGraphic(overlay,typeFace);
         }
 
         /**
@@ -316,7 +491,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
             mOverlay.add(mFaceGraphic);
            // mFaceGraphic.updateFace(face);
 
-            mFaceGraphic.updateFace_icon(face,bmp);
+            mFaceGraphic.updateFace_icon(face,typeFace);
 
         }
 

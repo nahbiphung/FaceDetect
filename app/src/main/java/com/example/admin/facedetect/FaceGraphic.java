@@ -38,14 +38,14 @@ import java.util.List;
 class FaceGraphic extends GraphicOverlay.Graphic {
     // Create bitmap REDHAT
     private Bitmap bitmap;
-    private Bitmap bmRedHat;
+    private Bitmap op;
 //    private int pos;
 
-    private static final float FACE_POSITION_RADIUS = 10.0f;
-    private static final float ID_TEXT_SIZE = 40.0f;
-    private static final float ID_Y_OFFSET = 50.0f;
-    private static final float ID_X_OFFSET = -50.0f;
-    private static final float BOX_STROKE_WIDTH = 5.0f;
+//    private static final float FACE_POSITION_RADIUS = 10.0f;
+//    private static final float ID_TEXT_SIZE = 40.0f;
+//    private static final float ID_Y_OFFSET = 50.0f;
+//    private static final float ID_X_OFFSET = -50.0f;
+//    private static final float BOX_STROKE_WIDTH = 5.0f;
 
     private static final int COLOR_CHOICES[] = {
         Color.BLUE,
@@ -56,6 +56,23 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         Color.WHITE,
         Color.YELLOW
     };
+
+    private static final int MASK[] = {
+            R.drawable.transparent,
+            R.drawable.hair,
+            R.drawable.op,
+            R.drawable.snap,
+            R.drawable.glasses2,
+            R.drawable.glasses3,
+            R.drawable.glasses4,
+            R.drawable.glasses5,
+            R.drawable.mask,
+            R.drawable.mask2,
+            R.drawable.mask3,
+            R.drawable.dog,
+            R.drawable.cat2
+    };
+
     private static int mCurrentColorIndex = 0;
 
     private Paint mFacePositionPaint;
@@ -66,28 +83,31 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     private int mFaceId;
     private float mFaceHappiness;
 
-    FaceGraphic(GraphicOverlay overlay, Bitmap bmp) {
+    FaceGraphic(GraphicOverlay overlay, int  c) {
         super(overlay);
 
-        mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.length;
-        final int selectedColor = COLOR_CHOICES[mCurrentColorIndex];
-
-        mFacePositionPaint = new Paint();
-        mFacePositionPaint.setColor(selectedColor);
-
-        mIdPaint = new Paint();
-        mIdPaint.setColor(selectedColor);
-        mIdPaint.setTextSize(ID_TEXT_SIZE);
-
-        mBoxPaint = new Paint();
-        mBoxPaint.setColor(selectedColor);
-        mBoxPaint.setStyle(Paint.Style.STROKE);
-        mBoxPaint.setStrokeWidth(BOX_STROKE_WIDTH);
+//        mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.length;
+//        final int selectedColor = COLOR_CHOICES[mCurrentColorIndex];
+//
+//        mFacePositionPaint = new Paint();
+//        mFacePositionPaint.setColor(selectedColor);
+//
+//        mIdPaint = new Paint();
+//        mIdPaint.setColor(selectedColor);
+//        mIdPaint.setTextSize(ID_TEXT_SIZE);
+//
+//        mBoxPaint = new Paint();
+//        mBoxPaint.setColor(selectedColor);
+//        mBoxPaint.setStyle(Paint.Style.STROKE);
+//        mBoxPaint.setStrokeWidth(BOX_STROKE_WIDTH);
 
         // add to add a REDHAT
         //bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(), R.drawable.nose);
-        this.bmRedHat = bmp;
+//        this.bmRedHat = bmp;
 //        this.pos = pos;
+
+        bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(),MASK[c]);
+        op = bitmap;
     }
 
     void setId(int id) {
@@ -101,17 +121,21 @@ class FaceGraphic extends GraphicOverlay.Graphic {
      */
     void updateFace(Face face) {
         mFace = face;
-        //update Face when put REDHAT in
-        bmRedHat = Bitmap.createScaledBitmap(bitmap, (int) scaleX(face.getWidth()),
-                (int) scaleY(((bitmap.getHeight() * face.getWidth()) / bitmap.getWidth())), false);
+
         postInvalidate();
     }
 
-    void updateFace_icon(Face face,Bitmap bmp) {
+    void updateFace_icon(Face face,int c) {
         mFace = face;
-        //update Face when put REDHAT in
-        bmRedHat = Bitmap.createScaledBitmap(bmp, (int) scaleX(face.getWidth()),
-                (int) scaleY(((bmp.getHeight() * face.getWidth()) / bmp.getWidth())), false);
+//        //update Face when put REDHAT in
+//        bmRedHat = Bitmap.createScaledBitmap(bmp, (int) scaleX(face.getWidth()),
+//                (int) scaleY(((bmp.getHeight() * face.getWidth()) / bmp.getWidth())), false);
+
+        bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(), MASK[c]);
+        op = bitmap;
+        op = Bitmap.createScaledBitmap(op, (int) scaleX(face.getWidth()),
+                (int) scaleY(((bitmap.getHeight() * face.getWidth()) / bitmap.getWidth())), false);
+
         postInvalidate();
     }
 
@@ -142,18 +166,20 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         float top = y - yOffset;
         float right = x + xOffset;
         float bottom = y + yOffset;
-        canvas.drawRect(left, top, right, bottom, mBoxPaint);
+//        canvas.drawRect(left, top, right, bottom, mBoxPaint);
+        canvas.drawBitmap(op, left, top, new Paint());
 
 
 
 //        Get REDHAT
 //        float eyeY =  bmRedHat.getHeight();
 
-        for(Landmark l : face.getLandmarks()){
-            if(l.getType() == Landmark.NOSE_BASE){
-                canvas.drawText("abc",x, y, mBoxPaint);
-            }
-        }
+//        for(Landmark l : face.getLandmarks()){
+//            if(l.getType() == Landmark.RIGHT_EYE){
+//                //canvas.drawBitmap(bmRedHat, left, top, new Paint());
+//                canvas.drawText("aaaaa",face.getWidth(),face.getHeight(),new Paint());
+//            }
+//        }
 
 //        canvas.drawBitmap(bmRedHat, left, top, new Paint());
     }

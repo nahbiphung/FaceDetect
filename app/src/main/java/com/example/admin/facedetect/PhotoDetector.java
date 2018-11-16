@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -64,6 +65,8 @@ public class PhotoDetector extends AppCompatActivity {
         myBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.photo);
         imgView.setImageBitmap(myBitmap);
 
+
+
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +82,7 @@ public class PhotoDetector extends AppCompatActivity {
                 paint.setStrokeWidth(5);
                 paint.setColor(Color.RED);
                 paint.setStyle(Paint.Style.STROKE);
+
 
                 tempBitmap = Bitmap.createBitmap(myBitmap.getWidth(),myBitmap.getHeight(),Bitmap.Config.RGB_565);
                 tempCanvas = new Canvas(tempBitmap);
@@ -119,7 +123,8 @@ public class PhotoDetector extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                bmRedHat = BitmapFactory.decodeResource(getResources(),R.drawable.redhat);
+
+                //bmRedHat = Bitmap.createBitmap(bmRedHat.getWidth()/2, bmRedHat.getHeight()/2, Bitmap.Config.RGB_565);
 
                 tempBitmap = Bitmap.createBitmap(myBitmap.getWidth(),myBitmap.getHeight(),Bitmap.Config.RGB_565);
                 tempCanvas = new Canvas(tempBitmap);
@@ -138,11 +143,23 @@ public class PhotoDetector extends AppCompatActivity {
                 Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
                 SparseArray<Face>  faces = faceDetector.detect(frame);
 
-                for(int i=0; i<faces.size(); i++) {
-                    Face face = faces.valueAt(i);
-                    detectLandmarks(face);
+                if(faces.size() > 1) {
+                    bmRedHat = BitmapFactory.decodeResource(getResources(),R.drawable.redhat_mini);
+                    for (int i = 0; i < faces.size(); i++) {
+                        Face face = faces.valueAt(i);
+                        detectLandmarks(face);
+                    }
+                    Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
+                }else {
+                    bmRedHat = BitmapFactory.decodeResource(getResources(),R.drawable.redhat_mini);
+                    for (int i = 0; i < faces.size(); i++) {
+                        Face face = faces.valueAt(i);
+                        detectLandmarks(face);
+                    }
+                    Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
                 }
-                imgView.setImageDrawable(new BitmapDrawable(getResources(),tempBitmap));
+
+                imgView.setImageDrawable(new BitmapDrawable(getResources(), tempBitmap));
             }
         });
 //        btnChoose.setOnClickListener(new View.OnClickListener() {
@@ -177,34 +194,36 @@ public class PhotoDetector extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if (requestCode == RQS_LOADIMAGE
-//                && resultCode == RESULT_OK){
 //
-//            if(myBitmap != null){
-//                myBitmap.recycle();
-//            }
-//
-//            try {
-//                InputStream inputStream =
-//                        getContentResolver().openInputStream(data.getData());
-//                myBitmap = BitmapFactory.decodeStream(inputStream);
-//                inputStream.close();
+        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == PICK_IMAGE_REQUSET && resultCode == RESULT_OK && data != null && data.getData() != null){
+//            filePath = data.getData();
+//            try{
+//                myBitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
 //                imgView.setImageBitmap(myBitmap);
-//
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
+//            }
+//            catch (IOException e){
 //                e.printStackTrace();
 //            }
 //        }
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUSET && resultCode == RESULT_OK && data != null && data.getData() != null){
-            filePath = data.getData();
-            try{
-                myBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
-                imgView.setImageBitmap(myBitmap);
+
+        if (requestCode == PICK_IMAGE_REQUSET
+                && resultCode == RESULT_OK){
+
+            if(myBitmap != null){
+                myBitmap.recycle();
             }
-            catch (IOException e){
+
+            try {
+                InputStream inputStream =
+                        getContentResolver().openInputStream(data.getData());
+                myBitmap = BitmapFactory.decodeStream(inputStream);
+                inputStream.close();
+                imgView.setImageBitmap(myBitmap);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -224,6 +243,7 @@ public class PhotoDetector extends AppCompatActivity {
             int scaleWidth = bmRedHat.getScaledWidth(tempCanvas);
             int scaleHeight = bmRedHat.getScaledHeight(tempCanvas);
             tempCanvas.drawBitmap(bmRedHat,cx - (scaleWidth/2),cy - (scaleHeight),null);
+          //  tempCanvas.drawBitmap(bmRedHat,cx,cy,null);
         }
     }
 //    private void detectFace(){
