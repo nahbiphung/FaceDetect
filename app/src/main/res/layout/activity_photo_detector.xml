@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="54dp" />
 
     <Button
         android:id="@+id/btn_choose"
@@ -44,8 +44,220 @@
         android:layout_alignTop="@+id/btn_check"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="294dp"
-        android:layout_marginLeft="294dp"
+        android:layout_marginStart="293dp"
+        android:layout_marginLeft="293dp"
+        android:layout_marginTop="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/redhat" />
+        android:src="@drawable/face"
+        android:background="#000000"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/face_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="19dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:scaleType="fitXY"
+        android:src="@drawable/face" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp">
+        </RelativeLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/scrollView_photo"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/round_background"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/no_filter_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background_select"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/no_filter" />
+
+                <ImageButton
+                    android:id="@+id/hair_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hair" />
+
+                <ImageButton
+                    android:id="@+id/op_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/op" />
+
+                <ImageButton
+                    android:id="@+id/snap_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/snap" />
+
+                <ImageButton
+                    android:id="@+id/glasses2_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/glasses2" />
+
+                <ImageButton
+                    android:id="@+id/glasses3_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/glasses3" />
+
+                <ImageButton
+                    android:id="@+id/glasses4_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/glasses4" />
+
+                <ImageButton
+                    android:id="@+id/glasses5_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/glasses5" />
+
+                <ImageButton
+                    android:id="@+id/mask_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mask" />
+
+                <ImageButton
+                    android:id="@+id/mask2_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mask2" />
+
+                <ImageButton
+                    android:id="@+id/mask3_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/mask3" />
+
+                <ImageButton
+                    android:id="@+id/dog_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dog" />
+
+                <ImageButton
+                    android:id="@+id/cat2_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_background"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/cat2" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+        <HorizontalScrollView
+            android:id="@+id/scrollView_photo_1"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/round_background"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/no_filter_photo_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_background_select"
+                android:scaleType="fitXY"
+                android:src="@drawable/no_filter" />
+
+            <ImageButton
+                android:id="@+id/redhat_photo_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_background"
+                android:scaleType="fitXY"
+                android:src="@drawable/redhat" />
+        </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 </RelativeLayout>
