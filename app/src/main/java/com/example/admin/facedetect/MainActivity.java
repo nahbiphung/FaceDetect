@@ -44,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Camera Detector",Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Toast.makeText(MainActivity.this,"ccc",Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainActivity.this,BarcodeDetector.class);
+                        startActivity(intent2);
+                        Toast.makeText(MainActivity.this,"Barcode Detector",Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
-                        Toast.makeText(MainActivity.this,"ddd",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Comming soon!",Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
