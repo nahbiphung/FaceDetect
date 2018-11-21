@@ -68,7 +68,8 @@ public class PhotoDetector extends AppCompatActivity {
     };
 
     private  static  final  int MASK1[] ={
-            R.id.no_filter
+            R.id.no_filter_photo_1,
+            R.id.redhat_photo_1
     };
 //    private static final int RQS_LOADIMAGE = 1;
 //    private Bitmap myBitmap;
@@ -350,7 +351,7 @@ public class PhotoDetector extends AppCompatActivity {
             SparseArray<Face>  faces = faceDetector.detect(frame);
 
             if(faces.size() > 1) {
-                bmRedHat = BitmapFactory.decodeResource(getResources(), R.drawable.redhat_mini);
+                bmRedHat = BitmapFactory.decodeResource(getResources(), R.drawable.redhat);
                 for (int i = 0; i < faces.size(); i++) {
                     Face face = faces.valueAt(i);
                     detectLandmarks(face);
@@ -358,7 +359,7 @@ public class PhotoDetector extends AppCompatActivity {
                 Toast.makeText(PhotoDetector.this, faces.size() + "", Toast.LENGTH_SHORT).show();
             }
             else{
-                bmRedHat = BitmapFactory.decodeResource(getResources(), R.drawable.redhat_mini);
+                bmRedHat = BitmapFactory.decodeResource(getResources(), R.drawable.redhat);
                 for (int i = 0; i < faces.size(); i++) {
                     Face face = faces.valueAt(i);
                     detectLandmarks(face);
@@ -398,7 +399,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x-120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x-80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -435,7 +436,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x-120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x-80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -473,7 +474,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x - 120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x - 80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -549,7 +550,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -587,7 +588,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -625,7 +626,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -663,7 +664,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -701,7 +702,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -739,7 +740,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
@@ -777,7 +778,7 @@ public class PhotoDetector extends AppCompatActivity {
                     float yOffset = (face.getHeight() / 2.0f);
                     float left = x - xOffset;
                     float top = y - yOffset;
-                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -120,face.getPosition().y -180,new Paint());
+                    tempCanvas.drawBitmap(bmRedHat,face.getPosition().x -80,face.getPosition().y -100,new Paint());
                 }
                 Toast.makeText(PhotoDetector.this, faces.size()+"", Toast.LENGTH_SHORT).show();
 
